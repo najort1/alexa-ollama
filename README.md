@@ -95,7 +95,3 @@ Ajuste esses parâmetros conforme necessário para o seu caso de uso.
 
 - O modelo roda localmente, garantindo privacidade e controle total dos dados.
 - Ajuste os parâmetros de geração (`temperature`, `top_k`, `top_p`, etc.) em `app.py` conforme necessário para o seu caso de uso.
-
-## Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
