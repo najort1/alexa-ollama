@@ -5,9 +5,12 @@ Este projeto implementa uma API Flask que integra um modelo de linguagem local (
 ## Funcionalidades
 
 - Responde perguntas de forma leve, criativa e com bom humor.
-- Limita as respostas a 500 caracteres.
+- Limita as respostas a 800 caracteres.
 - Integração fácil com Alexa e outros sistemas via HTTP POST.
 - Utiliza modelos locais via Ollama, sem depender de serviços externos.
+- **Memória de conversação:** mantém histórico das interações do usuário, permitindo respostas mais contextuais.
+- **Persistência de histórico:** utiliza banco de dados SQLite para armazenar o histórico das conversas.
+- **Gerenciamento de sessões:** cada usuário tem seu próprio histórico, com limpeza automática de sessões inativas.
 
 ## Requisitos
 
@@ -42,8 +45,9 @@ Este projeto implementa uma API Flask que integra um modelo de linguagem local (
 
 ## Configuração
 
-- O modelo padrão utilizado é `gemma3:4b`. Você pode alterar a variável `MODEL` no arquivo `app.py` para outro modelo disponível no Ollama.
+- O modelo padrão utilizado é `gemma3:1b`. Você pode alterar a variável `MODEL` no arquivo `app.py` para outro modelo disponível no Ollama.
 - O serviço Flask roda por padrão em `http://0.0.0.0:5000`.
+- O histórico das conversas é armazenado no arquivo `historico_conversas.db` (SQLite), criado automaticamente na primeira execução.
 
 ## Uso
 
@@ -63,6 +67,13 @@ Resposta esperada:
 ```json
 {"resposta": "Paris, claro! A cidade das luzes e dos croissants deliciosos."}
 ```
+
+## Memória e Histórico de Conversa
+
+- O assistente mantém um histórico das últimas interações de cada usuário (sessão), permitindo respostas mais contextuais.
+- O histórico é salvo em um banco de dados SQLite, garantindo persistência mesmo após reiniciar o servidor.
+- Cada sessão é identificada por um `session_id` (usado pela Alexa ou definido como "default" em requisições simples).
+- Sessões inativas são limpas automaticamente após um tempo configurável.
 
 ## Parâmetros do Modelo
 
@@ -88,10 +99,12 @@ Ajuste esses parâmetros conforme necessário para o seu caso de uso.
 ```
 .
 ├── app.py
+├── historico_conversas.db
 └── README.md
 ```
 
 ## Observações
 
 - O modelo roda localmente, garantindo privacidade e controle total dos dados.
+- O histórico de conversas é persistente e pode ser limpo por sessão.
 - Ajuste os parâmetros de geração (`temperature`, `top_k`, `top_p`, etc.) em `app.py` conforme necessário para o seu caso de uso.
