@@ -56,7 +56,7 @@ Configure sua skill para enviar requisições POST para o endpoint `/` ou `/alex
 Você pode testar a API usando o `curl` ou ferramentas como Postman:
 
 ```bash
-curl -X POST http://localhost:5000/alexa -H "Content-Type: application/json" -d '{"pergunta": "Qual a capital da França?"}'
+curl -X POST http://localhost:5000/alexa -H "Content-Type: application/json" -d "{\"pergunta\": \"Qual a capital da Franca\"}"
 ```
 
 Resposta esperada:
